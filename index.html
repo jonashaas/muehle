@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MÜHLWERK — Markenkonzept für die Mühle Poltringen</title>
+<style>
+  :root{
+    --ink:#15333C;
+    --ink-deep:#0D2229;
+    --ink-soft:#1C404B;
+    --gold:#D9A03C;
+    --gold-soft:#E4B96B;
+    --paper:#F4F3EC;
+    --stein:#9FB0AC;
+    --hair:rgba(244,243,236,.14);
+    --stack:"Avenir Next","Futura","Segoe UI",Inter,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink-deep);
+    color:var(--paper);
+    font-family:var(--stack);
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--gold);color:var(--ink-deep)}
+
+  .wrap{max-width:1060px;margin:0 auto;padding:0 28px}
+
+  /* ---------- eyebrow / labels ---------- */
+  .eyebrow{
+    font-size:12px;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;
+  }
+  .label{
+    font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--stein);font-weight:600;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    text-align:center;position:relative;overflow:hidden;
+    padding:64px 24px;
+  }
+  .hero .eyebrow{opacity:0;animation:rise .9s .2s ease forwards}
+  .hero-logo{width:min(720px,92vw);margin:42px 0 30px}
+  .hero-sub{
+    max-width:520px;color:var(--stein);
+    opacity:0;animation:rise .9s 2.5s ease forwards;
+  }
+  .hero-sub strong{color:var(--paper);font-weight:600}
+  .scroll-hint{
+    position:absolute;bottom:30px;left:0;right:0;text-align:center;
+    color:var(--stein);font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+    opacity:0;animation:rise .9s 3.2s ease forwards;
+  }
+  .scroll-hint::after{
+    content:"";display:block;width:1px;height:34px;margin:10px auto 0;
+    background:linear-gradient(var(--gold),transparent);
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+  /* logo draw-on */
+  .draw{
+    stroke-dasharray:1;stroke-dashoffset:1;
+    animation:draw 1.1s ease forwards;
+  }
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .wheel-g{opacity:0;animation:appear .6s 1.7s ease forwards;transform-origin:130px 60px}
+  .drop{opacity:0;animation:dropin .55s cubic-bezier(.2,.9,.3,1.3) forwards}
+  @keyframes appear{to{opacity:1}}
+  @keyframes dropin{from{opacity:0;transform:translateY(-22px)}to{opacity:1;transform:none}}
+  .tagline-t{opacity:0;animation:rise .9s 2.2s ease forwards}
+  .wheel-spin{transform-origin:130px 60px;animation:spin 26s 2s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* ---------- sections ---------- */
+  section{padding:110px 0;border-top:1px solid var(--hair)}
+  .sec-head{display:flex;align-items:baseline;gap:22px;margin-bottom:54px;flex-wrap:wrap}
+  h2{
+    font-size:clamp(26px,3.4vw,38px);font-weight:600;letter-spacing:.01em;
+  }
+  .lede{max-width:640px;color:var(--stein);font-size:18px}
+  .lede strong{color:var(--paper);font-weight:600}
+
+  /* naming */
+  .name-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:start}
+  .name-grid p+p{margin-top:18px}
+  .name-grid p{color:var(--stein)}
+  .name-grid p strong{color:var(--paper)}
+  .alt-list{border-left:1px solid var(--hair);padding-left:32px}
+  .alt-list .label{display:block;margin-bottom:20px}
+  .alt{padding:14px 0;border-bottom:1px solid var(--hair)}
+  .alt b{display:block;font-size:19px;letter-spacing:.14em;font-weight:600;color:var(--stein)}
+  .alt span{font-size:13.5px;color:var(--stein);opacity:.75}
+  .alt.keep b{color:var(--gold)}
+  .alt.keep span{opacity:1;color:var(--paper)}
+
+  /* sign / double reading */
+  .sign-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+  .sign-card{
+    background:var(--ink-soft);border:1px solid var(--hair);border-radius:18px;
+    padding:42px 36px;text-align:center;
+  }
+  .sign-card svg{width:120px;margin-bottom:22px}
+  .sign-card h3{font-size:17px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin-bottom:10px;color:var(--gold)}
+  .sign-card p{font-size:15px;color:var(--stein);max-width:330px;margin:0 auto}
+
+  /* variants */
+  .var-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+  .card{
+    border-radius:18px;border:1px solid var(--hair);
+    display:flex;align-items:center;justify-content:center;
+    min-height:300px;padding:44px;position:relative;
+  }
+  .card .label{position:absolute;top:20px;left:24px}
+  .card.light{background:var(--paper)}
+  .card.light .label{color:#7d8a86}
+  .card.dark{background:var(--ink-soft)}
+  .card svg{width:100%;max-width:430px}
+  .card.coin svg{max-width:150px}
+  .card.scale{flex-direction:row;gap:8vw}
+  .card.scale .s1{width:200px}.card.scale .s2{width:110px}.card.scale .s3{width:44px}
+
+  /* palette */
+  .pal{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .chip{border-radius:14px;overflow:hidden;border:1px solid var(--hair)}
+  .chip .swatch{height:150px}
+  .chip .meta{padding:14px 16px;background:var(--ink-soft)}
+  .chip .meta b{display:block;font-size:14px;letter-spacing:.06em}
+  .chip .meta span{font-size:12.5px;color:var(--stein);letter-spacing:.08em}
+
+  footer{
+    border-top:1px solid var(--hair);
+    padding:54px 0 64px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    color:var(--stein);font-size:13px;letter-spacing:.06em;
+  }
+  footer svg{width:42px}
+
+  @media (max-width:760px){
+    section{padding:72px 0}
+    .name-grid,.sign-grid,.var-grid{grid-template-columns:1fr}
+    .pal{grid-template-columns:repeat(2,1fr)}
+    .alt-list{border-left:none;padding-left:0;border-top:1px solid var(--hair);padding-top:28px}
+    .card.scale{flex-wrap:wrap;gap:28px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms !important;animation-delay:0ms !important;animation-iteration-count:1 !important}
+    .hero .eyebrow,.hero-sub,.scroll-hint,.wheel-g,.drop,.tagline-t{opacity:1}
+    .draw{stroke-dashoffset:0}
+  }
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <p class="eyebrow">Markenkonzept · Aus Mühle Poltringen wird</p>
+
+  <!-- Animated wordmark (paper/gold on ink) -->
+  <svg class="hero-logo" viewBox="0 -36 686 210" role="img" aria-label="MÜHLWERK — Frische seit 1888">
+    <g fill="none" stroke="#F4F3EC" stroke-width="13" stroke-linecap="round" stroke-linejoin="round">
+      <path class="draw" style="animation-delay:.15s" pathLength="1" d="M7,93 V7 L39,58 L71,7 V93"/>
+      <path class="draw" style="animation-delay:.32s" pathLength="1" d="M101,7 V64 A29,29 0 0 0 159,64 V7"/>
+      <path class="draw" style="animation-delay:.49s" pathLength="1" d="M189,7 V93 M247,7 V93 M189,50 H247"/>
+      <path class="draw" style="animation-delay:.66s" pathLength="1" d="M277,7 V93 H325"/>
+      <path class="draw" style="animation-delay:.83s" pathLength="1" d="M345,7 L364,93 L386,32 L408,93 L427,7"/>
+      <path class="draw" style="animation-delay:1.0s" pathLength="1" d="M513,7 H465 V93 H513 M465,50 H503"/>
+      <path class="draw" style="animation-delay:1.17s" pathLength="1" d="M541,93 V7 H571 A21.5,21.5 0 0 1 571,50 H541 M565,50 L595,93"/>
+      <path class="draw" style="animation-delay:1.34s" pathLength="1" d="M625,7 V93 M679,7 L625,54 M643,40 L679,93"/>
+    </g>
+    <!-- water wheel inside the Ü -->
+    <g class="wheel-g">
+      <g class="wheel-spin">
+        <g fill="none" stroke="#D9A03C" stroke-width="4.5" stroke-linecap="round">
+          <circle cx="130" cy="60" r="18"/>
+          <line x1="130" y1="42" x2="130" y2="78"/>
+          <line x1="114.41" y1="51" x2="145.59" y2="69"/>
+          <line x1="145.59" y1="51" x2="114.41" y2="69"/>
+        </g>
+      </g>
+      <circle cx="130" cy="60" r="3.2" fill="#D9A03C"/>
+    </g>
+    <!-- umlaut drops -->
+    <circle class="drop" style="animation-delay:1.9s" cx="115" cy="-17" r="7" fill="#D9A03C"/>
+    <circle class="drop" style="animation-delay:2.05s" cx="145" cy="-17" r="7" fill="#D9A03C"/>
+    <text class="tagline-t" x="347" y="152" text-anchor="middle"
+      style="font-family:var(--stack);font-weight:600;font-size:21px;letter-spacing:8px;fill:#F4F3EC">FRISCHE SEIT 1888</text>
+  </svg>
+
+  <p class="hero-sub">Ein Name, der mitzieht: <strong>MÜHLWERK</strong> nimmt die Mühle mit —
+  und lässt Poltringen los. Vier Generationen Handwerk, jeden Morgen frisch vom Großmarkt.</p>
+
+  <p class="scroll-hint">Konzept ansehen</p>
+</header>
+
+<main class="wrap">
+
+  <!-- ================= NAME ================= -->
+  <section id="name">
+    <div class="sec-head">
+      <span class="eyebrow">01 · Der Name</span>
+      <h2>Warum MÜHLWERK?</h2>
+    </div>
+    <div class="name-grid">
+      <div>
+        <p><strong>„Mühle“ bleibt, „Poltringen“ geht.</strong> Seit 1888 ist die Mühle der Kern
+        des Familienbetriebs Holz — der Ortsname aber bindet die Marke an eine Adresse,
+        die morgen eine andere sein kann. MÜHLWERK trägt die Herkunft weiter, ohne ein
+        Ortsschild zu sein.</p>
+        <p><strong>„-werk“ erzählt, was heute passiert.</strong> Aus dem Mühleladen wurde ein
+        Gastroservice: täglicher Einkauf auf dem Großmarkt, flexible Mengen, verlässliche
+        Lieferung. „Werk“ steht für Betrieb, Mechanik und Handwerk zugleich — die Mühle
+        ist nicht mehr nur ein Gebäude, sie ist ein laufendes System.</p>
+        <p><strong>Ein Wort, acht Buchstaben, null Erklärungsbedarf.</strong> Deutsch,
+        kantig, gut zu rufen, gut zu googeln — und mit dem Ü ein Zeichen, das kein
+        Wettbewerber kopieren kann.</p>
+      </div>
+      <div class="alt-list">
+        <span class="label">Geprüfte Alternativen</span>
+        <div class="alt keep"><b>MÜHLWERK</b><span>Herkunft + Betrieb. Funktioniert an jedem Standort.</span></div>
+        <div class="alt"><b>MAHLWERK</b><span>Stark, aber es wird nicht mehr gemahlen.</span></div>
+        <div class="alt"><b>AMMER &amp; HOLZ</b><span>Schön regional — und damit wieder ortsgebunden.</span></div>
+        <div class="alt"><b>FRISCHWERK</b><span>Beschreibt das Heute, verliert 400 Jahre Geschichte.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SIGN ================= -->
+  <section id="zeichen">
+    <div class="sec-head">
+      <span class="eyebrow">02 · Das Zeichen</span>
+      <h2>Ein Ü, zwei Lesarten</h2>
+    </div>
+    <p class="lede" style="margin-bottom:54px">Das Ü ist das einzige verzierte Element der Wortmarke —
+    alles andere bleibt ruhig. Genau dort treffen sich Geschichte und Gegenwart.</p>
+    <div class="sign-grid">
+      <div class="sign-card">
+        <svg viewBox="0 0 72 122" aria-hidden="true">
+          <g transform="translate(0,24)">
+            <path fill="none" stroke="#F4F3EC" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" d="M7,7 V64 A29,29 0 0 0 65,64 V7"/>
+            <g fill="none" stroke="#D9A03C" stroke-width="4.5" stroke-linecap="round">
+              <circle cx="36" cy="60" r="18"/>
+              <line x1="36" y1="42" x2="36" y2="78"/>
+              <line x1="20.41" y1="51" x2="51.59" y2="69"/>
+              <line x1="51.59" y1="51" x2="20.41" y2="69"/>
+            </g>
+            <circle cx="36" cy="60" r="3.2" fill="#D9A03C"/>
+            <circle cx="21" cy="-17" r="7" fill="#D9A03C"/>
+            <circle cx="51" cy="-17" r="7" fill="#D9A03C"/>
+          </g>
+        </svg>
+        <h3>Das Wasserrad</h3>
+        <p>Der U-Bogen wird zum Gerinne, die Umlautpunkte zu Wassertropfen,
+        die das goldene Rad antreiben — die Wassermühle von 1613, auf ein Zeichen verdichtet.</p>
+      </div>
+      <div class="sign-card">
+        <svg viewBox="0 0 72 122" aria-hidden="true">
+          <g transform="translate(0,24)">
+            <g fill="none" stroke="#D9A03C" stroke-width="4.5" stroke-linecap="round">
+              <circle cx="36" cy="60" r="18"/>
+              <line x1="36" y1="42" x2="36" y2="78"/>
+              <line x1="20.41" y1="51" x2="51.59" y2="69"/>
+              <line x1="51.59" y1="51" x2="20.41" y2="69"/>
+            </g>
+            <circle cx="36" cy="60" r="3.2" fill="#D9A03C"/>
+          </g>
+        </svg>
+        <h3>Die frische Scheibe</h3>
+        <p>Allein gelesen ist dasselbe Rad eine aufgeschnittene Frucht —
+        das Tagesgeschäft: Obst und Gemüse, jeden Morgen frisch vom Stuttgarter Großmarkt.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VARIANTS ================= -->
+  <section id="varianten">
+    <div class="sec-head">
+      <span class="eyebrow">03 · Anwendung</span>
+      <h2>Vom Lieferschein bis zur LKW-Plane</h2>
+    </div>
+    <div class="var-grid">
+      <div class="card light">
+        <span class="label">Primär · auf hell</span>
+        <svg viewBox="0 -36 686 210"><use href="#lock-ink"/></svg>
+      </div>
+      <div class="card dark">
+        <span class="label">Invers · auf dunkel</span>
+        <svg viewBox="0 -36 686 210"><use href="#lock-paper"/></svg>
+      </div>
+      <div class="card dark coin">
+        <span class="label">Monogramm · App &amp; Stempel</span>
+        <svg viewBox="0 0 120 120"><use href="#coin"/></svg>
+      </div>
+      <div class="card light scale">
+        <span class="label">Skalierungstest</span>
+        <svg class="s1" viewBox="0 -36 686 210"><use href="#lock-ink"/></svg>
+        <svg class="s2" viewBox="0 -36 686 210"><use href="#lock-ink"/></svg>
+        <svg class="s3" viewBox="0 0 120 120"><use href="#coin"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COLOR ================= -->
+  <section id="farben">
+    <div class="sec-head">
+      <span class="eyebrow">04 · Farben</span>
+      <h2>Wasser, Korn, Papier, Stein</h2>
+    </div>
+    <div class="pal">
+      <div class="chip"><div class="swatch" style="background:#15333C"></div><div class="meta"><b>Tiefwasser</b><span>#15333C · Wortmarke</span></div></div>
+      <div class="chip"><div class="swatch" style="background:#D9A03C"></div><div class="meta"><b>Korn</b><span>#D9A03C · Rad &amp; Akzent</span></div></div>
+      <div class="chip"><div class="swatch" style="background:#F4F3EC"></div><div class="meta"><b>Papier</b><span>#F4F3EC · Fläche</span></div></div>
+      <div class="chip"><div class="swatch" style="background:#9FB0AC"></div><div class="meta"><b>Stein</b><span>#9FB0AC · Sekundärtext</span></div></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <svg viewBox="0 0 120 120" aria-hidden="true"><use href="#coin"/></svg>
+  <span>MÜHLWERK · Konzeptstudie für die Mühle Poltringen / Familie Holz · 2026</span>
+</footer>
+
+<!-- ====== shared symbols ====== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="wheel-glyph">
+      <g fill="none" stroke="#D9A03C" stroke-width="4.5" stroke-linecap="round">
+        <circle cx="130" cy="60" r="18"/>
+        <line x1="130" y1="42" x2="130" y2="78"/>
+        <line x1="114.41" y1="51" x2="145.59" y2="69"/>
+        <line x1="145.59" y1="51" x2="114.41" y2="69"/>
+      </g>
+      <circle cx="130" cy="60" r="3.2" fill="#D9A03C"/>
+      <circle cx="115" cy="-17" r="7" fill="#D9A03C"/>
+      <circle cx="145" cy="-17" r="7" fill="#D9A03C"/>
+    </g>
+    <g id="word-strokes">
+      <path d="M7,93 V7 L39,58 L71,7 V93"/>
+      <path d="M101,7 V64 A29,29 0 0 0 159,64 V7"/>
+      <path d="M189,7 V93 M247,7 V93 M189,50 H247"/>
+      <path d="M277,7 V93 H325"/>
+      <path d="M345,7 L364,93 L386,32 L408,93 L427,7"/>
+      <path d="M513,7 H465 V93 H513 M465,50 H503"/>
+      <path d="M541,93 V7 H571 A21.5,21.5 0 0 1 571,50 H541 M565,50 L595,93"/>
+      <path d="M625,7 V93 M679,7 L625,54 M643,40 L679,93"/>
+    </g>
+    <g id="lock-ink">
+      <g fill="none" stroke="#15333C" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"><use href="#word-strokes"/></g>
+      <use href="#wheel-glyph"/>
+      <text x="347" y="152" text-anchor="middle" style="font-family:var(--stack);font-weight:600;font-size:21px;letter-spacing:8px;fill:#15333C">FRISCHE SEIT 1888</text>
+    </g>
+    <g id="lock-paper">
+      <g fill="none" stroke="#F4F3EC" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"><use href="#word-strokes"/></g>
+      <use href="#wheel-glyph"/>
+      <text x="347" y="152" text-anchor="middle" style="font-family:var(--stack);font-weight:600;font-size:21px;letter-spacing:8px;fill:#F4F3EC">FRISCHE SEIT 1888</text>
+    </g>
+    <g id="coin">
+      <circle cx="60" cy="60" r="58" fill="#15333C"/>
+      <circle cx="60" cy="60" r="53.5" fill="none" stroke="#D9A03C" stroke-width="1.5" opacity="0.55"/>
+      <g transform="translate(34.1,32.9) scale(0.72)">
+        <path fill="none" stroke="#F4F3EC" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" d="M7,7 V64 A29,29 0 0 0 65,64 V7"/>
+        <g fill="none" stroke="#D9A03C" stroke-width="4.5" stroke-linecap="round">
+          <circle cx="36" cy="60" r="18"/>
+          <line x1="36" y1="42" x2="36" y2="78"/>
+          <line x1="20.41" y1="51" x2="51.59" y2="69"/>
+          <line x1="51.59" y1="51" x2="20.41" y2="69"/>
+        </g>
+        <circle cx="36" cy="60" r="3.2" fill="#D9A03C"/>
+        <circle cx="21" cy="-17" r="7" fill="#D9A03C"/>
+        <circle cx="51" cy="-17" r="7" fill="#D9A03C"/>
+      </g>
+    </g>
+  </defs>
+</svg>
+
+</body>
+</html>
